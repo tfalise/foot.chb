@@ -7,8 +7,8 @@
   <?php if($event['fee'] != 0): ?>
   <p><b>Prix / Personne :</b> <?php echo $event['fee']; ?></p>
   <?php endif; ?>
-  <?php if($user != false && $user['id'] != $event['idOwner']): ?>
   <div id="subscribeBox">
+  <?php if($user != false && $user['id'] != $event['idOwner']): ?>
    <?php $canSubscribe = true; ?>
    <?php foreach($subscriptions as $subscription): ?>
     <?php if($subscription['idUser'] == $user['id']): ?>
@@ -20,8 +20,10 @@
    <?php else: ?>
     <p><?php echo anchor('event/unsubscribe/' . $event['id'], "Se d&eacute;sinscrire"); ?></p>
    <?php endif; ?>
-  </div>
+  <?php elseif($user != false && $user['id'] == $event['idOwner']) ?>
+	<p><?php echo anchor('event/delete/' . $event['id'], "Supprimer l'&eacute;v&egrave;nement"); ?></p>
   <?php endif; ?>
+  </div>
   <ul class="attendeeList">
    <?php $i = 0; ?>
    <?php foreach($subscriptions as $subscription): ?>

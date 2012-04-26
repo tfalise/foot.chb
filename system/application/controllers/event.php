@@ -108,19 +108,6 @@ class Event extends Controller {
         $this->load->view('footer');
     }
     
-    function _check_DateFormat($str)
-    {
-        $datePattern = '/^\d{2}:\d{2}$/';
-    
-        if(preg_match($datePattern, $str) < 1)
-        {    
-            $this->form_validation->set_message('_check_DateFormat', 'La date du champ %s n\'est pas dans le bon format');
-            return false;
-        }
-        
-        return true;
-    }
-    
     function view($eventId) {
         $sessionUser = $this->session->userdata('user');
     
@@ -143,6 +130,27 @@ class Event extends Controller {
         $this->load->view('footer');
     }
 
+	function delete($eventId) {
+		$sessionUser = $this->session->userdata('user');
+		
+		if(!$sessionUser)
+		{
+			redirect('');
+		}
+        
+        $this->load->model('Eventmodel','events');
+		$event = $this->events->getEvent($eventId);
+		
+		if($sessionUser['id'] != $event['idOwner'])
+		{
+			redirect('');
+		}
+		
+		$this->events->deleteEvent($eventId);
+		
+		redirect('');
+	}
+	
     function subscribe($eventId) {  
         $sessionUser = $this->session->userdata('user');
         
@@ -169,6 +177,18 @@ class Event extends Controller {
         $this->events->unsubscribeToEvent($eventId, $sessionUser['id']);
         
         redirect(site_url('event/view/' . $eventId));
+    }
+
+    function _check_DateFormat($str) {
+        $datePattern = '/^\d{2}:\d{2}$/';
+    
+        if(preg_match($datePattern, $str) < 1)
+        {    
+            $this->form_validation->set_message('_check_DateFormat', 'La date du champ %s n\'est pas dans le bon format');
+            return false;
+        }
+        
+        return true;
     }
     
     function _getStartDate($refDate) {

@@ -43,6 +43,18 @@
             $this->subscribeToEvent($eventId, $eventData['idOwner']);
         }
         
+		function deleteEvent($eventId) {
+			// Clear event subscriptions
+			$this->clearEventSubscriptions($eventId);
+		
+			$criterias = array(
+				'id'	=> $eventId
+				);
+				
+			$this->db->where($criterias);
+			$this->db->delete('foot_events');
+		}
+		
         function subscribeToEvent($eventId, $userId) {
             // Add subscription for user
             $subscriptionData = array(
@@ -64,6 +76,15 @@
             $this->db->delete('foot_subscriptions');
         }
         
+		function clearEventSubscriptions($eventId) {
+			$criterias = array(
+				'idEvent'	=> $eventId
+				);
+				
+			$this->db->where($criterias);
+			$this->db->delete('foot_subscriptions');
+		}
+		
         function getEventSubscriptions($eventId) {        
             $this->db->select("foot_subscriptions.idUser, CONCAT(foot_users.surname ,' ' ,foot_users.name) as userName", FALSE);
             $this->db->from('foot_subscriptions');
