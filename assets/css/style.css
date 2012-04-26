@@ -1,0 +1,179 @@
+* 
+{
+    font-family: Arial, Sans Serif;
+    font-size: 10pt;
+}
+
+body {
+    margin: auto;
+    width: 800px;
+}
+
+/* HEADER */
+
+div#header {
+    text-align: center;
+}
+
+/* MENU STYLE */
+
+div#siteMenu {
+    margin: 20px 0;
+    padding: 6px 4px;
+    border-top: 1px solid #4e9a06;
+    border-left: 4px solid #4e9a06;
+    border-right: 4px solid #4e9a06;
+    border-bottom: 1px solid #4e9a06;
+}
+
+div#siteMenu span {
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+div#siteMenu span a {
+    padding: 2px 40px;
+    border: 1px solid #d3d7cf;
+    color: #babdb6;
+    text-decoration: none;
+}
+
+div#siteMenu span a:hover {
+    border: 1px solid #4e9a06;
+    background: #e1ffc4;
+    color: #4e9a06;
+}
+
+/* BODY COMMON STYLE */
+
+div#body
+{
+    padding: 30px;
+}
+
+/* CALENDAR STYLE */
+
+div#body div#calendarBody {
+    margin: 0 45px;
+    padding: 0;
+}
+
+div#body div.calendarBox h1 {
+    text-align: center;
+    font-variant: small-caps;
+}
+
+div#body div.calendarBox {
+    margin: 20px 20px;
+    float: left;
+}
+
+div#body div.calendarBox table.calendar th, div#body div.calendarBox table.calendar td
+{
+    width: 36px;
+    height: 26px;
+    text-align: center;
+    border: 1px solid black;
+    font-weight: bold;
+    padding: 0;
+}
+
+div#body div.calendarBox table.calendar th
+{
+    background: #eeeeec;
+}
+
+div#body div.calendarBox table.calendar td.weekDay  {
+    background: #eeeeec;
+}
+
+div#body div.calendarBox table.calendar td.noDay
+{
+    border-color: #d3d7cf;
+}
+
+div#body div.calendarBox table.calendar td.pastDay
+{
+    border-color: #888a85;
+    color: #888a85;
+    background: #fffffd;
+}
+
+div#body div.calendarBox table.calendar td a {
+    text-decoration: none;
+    line-height: 24px;
+    color: black;
+    display: block;
+}
+
+div#body div.calendarBox table.calendar td a.openEventDay
+{
+    background: #fce94f;
+}
+
+div#body div.calendarBox table.calendar td a.fullEventDay
+{
+    background: #729fcf;
+}
+
+/* FORM STYLE */
+
+div.formErrors 
+{
+    border: 1px solid #a40000;
+    background-color: #efa9a9;
+    color: #a40000;
+    font-weight: bold;
+    padding: 4px;
+    margin: 1px 0;
+}
+
+div.formErrors p
+{
+    margin: 2px 0;
+}
+
+form input {
+    border: 1px solid #4e9a06;
+}
+
+form ul {
+    list-style-type: none;
+}
+
+form ul li {
+    margin: 2px 0;
+}
+
+form ul li label {
+    display: inline-block;
+    text-align: right;
+    width: 140px;
+}
+
+/* EVENT STYLE */
+
+ul.attendeeList {
+    list-style-type: none;
+}
+
+ul.attendeeList li {
+    width: 300px;
+    padding: 2px 5px;
+    margin-bottom: 1px;
+    background: #f4f8ff;
+    border: 1px solid #204a87;
+}
+
+ul.attendeeList li.eventOwner {
+    font-weight: bold;
+    background: #e1ffc4;
+    border: 2px solid #4e9a06;
+    padding: 2px 4px;
+}
+
+ul.attendeeList li.waitList {
+    color: #888a85;
+    background: #f2f2f2;
+    border-color: #d3d7cf;
+}
