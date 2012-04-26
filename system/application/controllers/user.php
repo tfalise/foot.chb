@@ -123,7 +123,79 @@ class User extends Controller {
         
         redirect('');
     }
-    
+ 
+	function all() {
+		$sessionUser = $this->session->userdata('user');
+		
+		// Check that a user is logged and can admin users
+		if(!$sessionUser || !$sessionUser['canAdminUser'])
+		{
+			redirect('');
+		}
+		
+		$this->load->model('Usermodel', 'users');
+		$users = $this->users->getAllUsers();
+		
+		$viewData = array (
+			'users'	=> $users
+			);
+		
+		$this->load->view('header');
+        $this->load->view('menu');
+        $this->load->view('user_list', $viewData);
+        $this->load->view('footer');
+	}
+	
+	function edit($userId) {
+		$sessionUser = $this->session->userdata('user');
+		
+		// Check that a user is logged and can admin users
+		if(!$sessionUser || !$sessionUser['canAdminUser'])
+		{
+			redirect('');
+		}
+		
+		$this->load->helper('form');
+		
+		// Retrieve edited user data
+		$this->load->model('Usermodel', 'users');
+		$user = $this->users->getUser($userId);
+		
+		$viewData = array (
+			'user'	=> $user
+			);
+			
+		$this->load->view('header');
+        $this->load->view('menu');
+        $this->load->view('user_edit', $viewData);
+        $this->load->view('footer');
+	}
+	
+	function save($userId) {
+		$sessionUser = $this->session->userdata('user');
+		
+		// Check that a user is logged and can admin users
+		if(!$sessionUser || !$sessionUser['canAdminUser'])
+		{
+			redirect('');
+		}
+		
+		// Retrieve edited user data
+		$this->load->model('Usermodel', 'users');
+		
+		$userRights = array(
+			'canSubscribe'		=> $this->input->post('canSubscribe'),
+			'canCreateEvents'	=> $this->input->post('canCreateEvents'),
+			'canAdminUsers'		=> $this->input->post('canAdminUsers')
+			);
+			
+		$this->users->updateUserRights($userId, $userRights);
+		
+		$this->load->view('header');
+        $this->load->view('menu');
+        $this->load->view('user_edit_success');
+        $this->load->view('footer');
+	}
 }
 
 ?>

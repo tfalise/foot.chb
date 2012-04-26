@@ -15,10 +15,12 @@
      <?php $canSubscribe = false; ?>
     <?php endif; ?>
    <?php endforeach; ?>
-   <?php if($canSubscribe): ?>
-    <p><?php echo anchor('event/subscribe/' . $event['id'], "S'inscrire"); ?></p>
-   <?php else: ?>
-    <p><?php echo anchor('event/unsubscribe/' . $event['id'], "Se d&eacute;sinscrire"); ?></p>
+   <?php if($user['canSubscribe']): ?>
+    <?php if($canSubscribe): ?>
+     <p><?php echo anchor('event/subscribe/' . $event['id'], "S'inscrire"); ?></p>
+    <?php else: ?>
+     <p><?php echo anchor('event/unsubscribe/' . $event['id'], "Se d&eacute;sinscrire"); ?></p>
+    <?php endif; ?>
    <?php endif; ?>
   <?php elseif($user != false && $user['id'] == $event['idOwner']) ?>
 	<p><?php echo anchor('event/delete/' . $event['id'], "Supprimer l'&eacute;v&egrave;nement"); ?></p>

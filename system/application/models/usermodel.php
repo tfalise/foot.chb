@@ -31,6 +31,27 @@
             
         }
         
+		function getAllUsers() {
+			$this->db->select("id, CONCAT(surname ,' ' ,name) as userName, canSubscribe, canCreateEvents, canAdminUsers");
+            $this->db->from('foot_users');
+            $query = $this->db->get();
+            
+            return $query->result_array();
+		}
+		
+		function getUser($userId) {
+			$criterias = array (
+				'id'	=> $userId
+				);
+		
+			$this->db->select("id, CONCAT(surname ,' ' ,name) as userName, canSubscribe, canCreateEvents, canAdminUsers");
+            $this->db->from('foot_users');
+			$this->db->where($criterias);
+            $query = $this->db->get();
+            
+            return $query->result_array();
+		}
+		
         function validateUser($idUser, $userKey) {
         
             // Create criteria array
@@ -64,6 +85,11 @@
         
         function updateUser($userData) {
         }
+		
+		function updateUserRights($userId, $rights) {			
+			$this->db->where('id', $userId);
+			$this->db->update('foot_users', $updateData);
+		}
         
         function authenticateUser($email, $password) {
             $encPassword = $this->_encryptPassword($password);

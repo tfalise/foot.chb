@@ -56,7 +56,7 @@ class Event extends Controller {
     function create($year, $month, $day) {
         $sessionUser = $this->session->userdata('user');
         
-        if(!$sessionUser)
+        if(!$sessionUser || !$sessionUser['canCreateEvents'])
         {
             redirect('');
         }
@@ -133,7 +133,7 @@ class Event extends Controller {
 	function delete($eventId) {
 		$sessionUser = $this->session->userdata('user');
 		
-		if(!$sessionUser)
+		if(!$sessionUser || !$sessionUser['canCreateEvents'])
 		{
 			redirect('');
 		}
@@ -154,7 +154,7 @@ class Event extends Controller {
     function subscribe($eventId) {  
         $sessionUser = $this->session->userdata('user');
         
-        if(!$sessionUser)
+        if(!$sessionUser || !$sessionUser['canSubscribe'])
         {
             redirect('');
         }
